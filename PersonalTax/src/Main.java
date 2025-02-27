@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         TaxConfig taxConfig = new TaxConfig();
-        float income = 0;
+        float income;
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Personal Tex");
@@ -15,6 +15,6 @@ public class Main {
             taxConfig.setTaxConfig();
         }
 
-        taxConfig.CalculateTax(income);
+        taxConfig.calculateTax(income);
     }
 }

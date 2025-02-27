@@ -2,6 +2,9 @@ import java.util.Scanner;
 
 import static java.lang.Math.min;
 
+/**
+ * TaxConfig class manages tax configuration and calculations.
+ */
 public class TaxConfig {
     private int levelCount;
     private int taxThreshold;
@@ -12,20 +15,23 @@ public class TaxConfig {
         this.taxThreshold = 1600;
         this.taxRates = new Pair[this.levelCount];
 
-        this.taxRates[0] = new Pair(500f, 0.05f);
-        this.taxRates[1] = new Pair(2000f, 0.1f);
-        this.taxRates[2] = new Pair(5000f, 0.15f);
-        this.taxRates[3] = new Pair(20000f, 0.2f);
-        this.taxRates[4] = new Pair(Float.MAX_VALUE, 0.25f);
+        this.taxRates[0] = new Pair<>(500f, 0.05f);
+        this.taxRates[1] = new Pair<>(2000f, 0.1f);
+        this.taxRates[2] = new Pair<>(5000f, 0.15f);
+        this.taxRates[3] = new Pair<>(20000f, 0.2f);
+        this.taxRates[4] = new Pair<>(Float.MAX_VALUE, 0.25f);
     }
 
+    /**
+     * Sets the tax configuration based on user input.
+     */
     public void setTaxConfig() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Set Tax Config\n");
-        System.out.print("input tax threshold:");
+        System.out.print("Input tax threshold:");
         taxThreshold = scanner.nextInt();
-        System.out.print("input level count:");
+        System.out.print("Input level count:");
         levelCount = scanner.nextInt();
 
         taxRates = new Pair[levelCount];
@@ -40,18 +46,23 @@ public class TaxConfig {
                 taxableIncome = scanner.nextFloat();
                 rate = scanner.nextFloat();
             }
-            taxRates[i] = new Pair(taxableIncome, rate);
+            taxRates[i] = new Pair<>(taxableIncome, rate);
         }
     }
 
-    public float CalculateTax(float income) {
+    /**
+     * Calculates the tax based on the given income.
+     *
+     * @param income The income to calculate tax for.
+     */
+    public void calculateTax(float income) {
         float totalTax = 0;
         float taxableIncome = income - taxThreshold;
-        if(taxableIncome <= 0) return 0;
+        if(taxableIncome <= 0) return ;
 
         for(int i = 0; i < levelCount; ++i) {
-            float levelTaxable = 0;
-            float levelTax = 0;
+            float levelTaxable;
+            float levelTax;
             if(i == 0) {
                 levelTaxable = min(taxableIncome, taxRates[i].first);
             } else {
@@ -65,10 +76,11 @@ public class TaxConfig {
                     i + 1, levelTaxable, levelTaxable, taxRates[i].second, levelTax);
         }
         System.out.format("Total Tax : %.2f\n", totalTax);
-
-        return totalTax;
     }
 
+    /**
+     * Prints the current tax configuration.
+     */
     public void printTaxConfig() {
         System.out.print( "Current Tax Config: \n");
         System.out.println("\tTax Threshold: " + taxThreshold);
