@@ -28,3 +28,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### word/pdf/xlsl
+*.pdf
+*.xls
