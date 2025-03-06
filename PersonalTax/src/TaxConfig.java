@@ -11,6 +11,10 @@ public class TaxConfig {
     private int taxThreshold;
     private List<Pair<Float, Float>> taxRates;
 
+    /**
+     * Constructor
+     * Set default TaxConfig
+     */
     public TaxConfig() {
         this.levelCount = 5;
         this.taxThreshold = 1600;

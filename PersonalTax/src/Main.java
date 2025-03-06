@@ -1,6 +1,13 @@
 import java.util.Scanner;
 
+/**
+ * Main
+ */
 public class Main {
+    /**
+     * main method
+     * @param args run args
+     */
     public static void main(String[] args) {
         TaxConfig taxConfig = new TaxConfig();
         float income;
