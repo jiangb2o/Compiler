@@ -32,3 +32,6 @@ bin/
 ### word/pdf/xlsl
 *.pdf
 *.xls
+
+### javadoc
+docs/

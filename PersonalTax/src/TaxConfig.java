@@ -77,7 +77,9 @@ public class TaxConfig {
             } else {
                 levelTaxable = min(taxableIncome, taxRates.get(i).first) - taxRates.get(i-1).first;
             }
-            if(levelTaxable <= 0) break;
+            if(levelTaxable <= 0) {
+                levelTaxable = 0;
+            }
 
             levelTax = levelTaxable * taxRates.get(i).second;
             totalTax += levelTax;

@@ -13,7 +13,7 @@ public class Main {
         float income;
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Personal Tex");
+        System.out.println("Personal Tex");
         while(true) {
             taxConfig.printTaxConfig();
             System.out.println("input personal income(input 0 if you want to modify tax config):");
