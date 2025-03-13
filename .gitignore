@@ -35,3 +35,5 @@ bin/
 
 ### javadoc
 docs/
+### readme.txt
+*.txt
