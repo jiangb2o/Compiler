@@ -65,6 +65,7 @@ public class TaxConfig {
         float taxableIncome = income - taxThreshold;
         if(taxableIncome <= 0) {
             System.out.println("Tax threshold not reached.");
+            System.out.format("Total Tax : %.2f\n", 0.0f);
             return ;
         }
 
