@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import static java.lang.Math.min;
 
 /**
@@ -28,31 +27,20 @@ public class TaxConfig {
     }
 
     /**
-     * Sets the tax configuration based on user input.
+     * Set new tax threshold
+     * @param taxThreshold new tax threshold
      */
-    public void setTaxConfig() {
-        Scanner scanner = new Scanner(System.in);
+    public void adjustTaxThreshold(int taxThreshold) {
+        this.taxThreshold = taxThreshold;
+    }
 
-        System.out.print("Set Tax Config\n");
-        System.out.print("Input tax threshold:");
-        taxThreshold = scanner.nextInt();
-        System.out.print("Input level count:");
-        levelCount = scanner.nextInt();
-
-        taxRates.clear();
-        for (int i = 0; i < levelCount; i++) {
-            float taxableIncome = Float.MAX_VALUE;
-            float rate;
-            if(i == levelCount - 1) {
-                System.out.print("Input level " + (i + 1) + " tax rate (last level): ");
-                rate = scanner.nextFloat();
-            } else {
-                System.out.print("Input level " + (i + 1) + " taxable income and tax rate(split by space): ");
-                taxableIncome = scanner.nextFloat();
-                rate = scanner.nextFloat();
-            }
-            taxRates.add(new Pair<>(taxableIncome, rate));
-        }
+    /**
+     * Set new TaxConfig
+     * @param taxRates new tax rates
+     */
+    public void setTaxConfig(List<Pair<Float, Float>> taxRates) {
+        this.taxRates = taxRates;
+        levelCount = taxRates.size();
     }
 
     /**
