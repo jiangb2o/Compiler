@@ -37,3 +37,6 @@ bin/
 docs/
 ### readme.txt
 *.txt
+### compressed files
+*.rar
+*.zip
