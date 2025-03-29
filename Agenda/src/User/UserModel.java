@@ -5,8 +5,8 @@ import Agenda.AgendaModel;
 import java.util.ArrayList;
 
 public class UserModel {
-    private final String name;
-    private final String password;
+    private String name;
+    private String password;
 
     private ArrayList<AgendaModel> agendas;
 
@@ -29,6 +29,6 @@ public class UserModel {
     }
 
     public void addAgenda(AgendaModel agenda) {
-            agendas.add(agenda);
+        agendas.add(agenda);
     }
 }
