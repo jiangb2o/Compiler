@@ -124,7 +124,7 @@ public class AgendaService {
         if(agendaSystem.deleteAgenda(user1, label)){
             System.out.println("Agenda deleted successfully");
         } else {
-            System.out.println("Label corresponding agenda not exist");
+            System.out.println("delete failed");
         }
     }
 
@@ -140,7 +140,7 @@ public class AgendaService {
         }
 
         int count = agendaSystem.clearAgenda(user1);
-        System.out.format("delete agenda count: %d", count);
+        System.out.format("delete agenda count: %d\n", count);
     }
 
     private static void batch(String[] args) {
