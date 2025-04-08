@@ -7,9 +7,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * singleton agenda system
+ */
 public class AgendaSystem {
     private static AgendaSystem instance;
     private AgendaSystem() {}
+
+    /**
+     * get agenda system singleton instance
+     * @return instance
+     */
     public static AgendaSystem getInstance() {
         if (instance == null) {
             instance = new AgendaSystem();
@@ -40,6 +48,7 @@ public class AgendaSystem {
 
     /**
      * query agendas for user in date interval
+     * @param user user to query
      * @param start start date
      * @param end end date
      * @return agendas in interval
@@ -143,6 +152,12 @@ public class AgendaSystem {
         user2.getAgendas().remove(agenda);
     }
 
+    /**
+     * parse string to date format
+     * @param start start string
+     * @param end end string
+     * @return Date[] contains start and end
+     */
     public static Date[] parseStringToDate(String start, String end) {
         Date startDate;
         Date endDate;
@@ -156,6 +171,11 @@ public class AgendaSystem {
         return new Date[]{startDate, endDate};
     }
 
+    /**
+     * parse date to string
+     * @param date source date
+     * @return string format of date
+     */
     public static String parseDateToString(Date date) {
         return dateFormat.format(date);
     }

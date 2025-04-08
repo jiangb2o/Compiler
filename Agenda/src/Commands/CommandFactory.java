@@ -8,7 +8,17 @@ import User.UserSystem;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * command factory
+ */
 public class CommandFactory {
+    CommandFactory(){}
+
+    /**
+     * get command by args
+     * @param args command args
+     * @return target command class
+     */
     public static ICommand getCommand(String[] args) {
         return switch (args[0].toLowerCase()) {
             case "register" -> new RegisterCmd();
@@ -21,7 +31,9 @@ public class CommandFactory {
     }
 }
 
-
+/**
+ * register user command
+ */
 class RegisterCmd implements ICommand {
 
     @Override
@@ -44,6 +56,9 @@ class RegisterCmd implements ICommand {
     }
 }
 
+/**
+ * add agenda command
+ */
 class AddCmd implements ICommand {
 
     @Override
@@ -79,6 +94,9 @@ class AddCmd implements ICommand {
     }
 }
 
+/**
+ * query agenda command
+ */
 class QueryCmd implements ICommand {
     @Override
     public String exec(String[] args) {
@@ -107,6 +125,9 @@ class QueryCmd implements ICommand {
     }
 }
 
+/**
+ * delete agenda command
+ */
 class DeleteCmd implements ICommand {
     @Override
     public String exec(String[] args) {
@@ -132,6 +153,9 @@ class DeleteCmd implements ICommand {
     }
 }
 
+/**
+ * clear agenda command
+ */
 class ClearCmd implements ICommand {
     @Override
     public String exec(String[] args) {

@@ -6,10 +6,19 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Agenda Service
+ */
 public class AgendaService {
+    AgendaService(){}
+
     private static Scanner scanner = new Scanner(System.in);
     private static boolean quit = false;
 
+    /**
+     * program entrance
+     * @param args args
+     */
     public static void main(String[] args) {
         System.out.println("========Agenda Service========");
         while (!quit) {
@@ -20,6 +29,10 @@ public class AgendaService {
         System.out.println("========Agenda Service Quit========");
     }
 
+    /**
+     * parse input
+     * @param input user input
+     */
     private static void parseCommand(String input) {
         String[] args = input.split(" ");
 
@@ -43,6 +56,10 @@ public class AgendaService {
         System.out.print(message);
     }
 
+    /**
+     * execute batch command
+     * @param args command args
+     */
     private static void batch(String[] args) {
         if(args.length != 2) {
             System.out.println("Invalid command");
@@ -60,6 +77,10 @@ public class AgendaService {
         }
     }
 
+    /**
+     * execute quit command
+     * @param args command args
+     */
     private static void quit(String[] args) {
         if(args.length != 1) {
             System.out.println("Invalid command");
