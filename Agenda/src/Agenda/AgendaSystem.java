@@ -2,10 +2,23 @@ package Agenda;
 
 import User.UserModel;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class AgendaSystem {
+    private static AgendaSystem instance;
+    private AgendaSystem() {}
+    public static AgendaSystem getInstance() {
+        if (instance == null) {
+            instance = new AgendaSystem();
+        }
+        return instance;
+    }
+
+    private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
     /**
      * try to add agenda for users
      * @param user1 require user
@@ -128,5 +141,22 @@ public class AgendaSystem {
         UserModel user2 = agenda.getUser2();
         user1.getAgendas().remove(agenda);
         user2.getAgendas().remove(agenda);
+    }
+
+    public static Date[] parseStringToDate(String start, String end) {
+        Date startDate;
+        Date endDate;
+        try {
+            startDate = dateFormat.parse(start);
+            endDate = dateFormat.parse(end);
+        } catch (ParseException e) {
+            System.out.println("Invalid date format(correctly formatted date: yyyy-MM-dd HH:mm)");
+            throw new RuntimeException(e);
+        }
+        return new Date[]{startDate, endDate};
+    }
+
+    public static String parseDateToString(Date date) {
+        return dateFormat.format(date);
     }
 }

@@ -3,6 +3,15 @@ package User;
 import java.util.ArrayList;
 
 public class UserSystem {
+    private static UserSystem instance;
+    private UserSystem() {}
+    public static UserSystem getInstance() {
+        if (instance == null) {
+            instance = new UserSystem();
+        }
+        return instance;
+    }
+
     ArrayList<UserModel> users = new ArrayList<>();
 
     public boolean registerUser(String name, String password) {
@@ -29,5 +38,13 @@ public class UserSystem {
             }
         }
         return null;
+    }
+
+    public UserModel getValidateUser(String username, String password) {
+            if(validateUser(username, password)){
+                return getUserByName(username);
+            } else {
+                return null;
+            }
     }
 }
