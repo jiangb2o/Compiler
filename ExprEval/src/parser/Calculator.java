@@ -26,8 +26,6 @@ public class Calculator
 	**/
 	public double calculate(String expression) throws ExpressionException
 	{
-		// You should substitute this method body ...
-		double result = ((int) (Math.random() * 1000000000)) / 100.0;
-		return result;
-	}
+        return new Parser(expression).parse();
+    }
 }
