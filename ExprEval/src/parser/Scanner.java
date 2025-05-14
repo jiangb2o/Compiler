@@ -2,6 +2,8 @@ package parser;
 
 import parser.token.*;
 
+import exceptions.*;
+
 class Scanner {
     private final String input;
     private int index;
@@ -67,7 +69,7 @@ class Scanner {
             String fraction = scanDigit();
             // fraction part empty
             if(fraction.isEmpty()) {
-                throw new IllegalDecimalException;
+                throw new IllegalDecimalException();
             }
             tokenString += '.' + fraction;
         }
@@ -86,7 +88,7 @@ class Scanner {
             exponent = scanDigit();
             // exponent part empty
             if(exponent.isEmpty()) {
-                throw new IllegalDecimalException;
+                throw new IllegalDecimalException();
             }
             tokenString += 'e' + operator + exponent;
         }
@@ -107,7 +109,7 @@ class Scanner {
             index += 5;
             return new Bool(ETokenType.BOOL, "false");
         } else {
-            throw new IllegalIdentifierException;
+            throw new IllegalIdentifierException();
         }
     }
 
@@ -130,7 +132,7 @@ class Scanner {
             index += 3;
             return new Function(ETokenType.FUNCTION, "max");
         } else {
-            throw new IllegalIdentifierException;
+            throw new IllegalIdentifierException();
         }
     }
 
@@ -178,7 +180,7 @@ class Scanner {
                 case '>' -> new Operator(ETokenType.RELATION, ">");
                 case '<' -> new Operator(ETokenType.RELATION, "<");
                 case '=' -> new Operator(ETokenType.RELATION, "=");
-                default -> throw new IllegalSymbolException;
+                default -> throw new IllegalSymbolException();
             };
         }
         prevTokenType = op.getTokenType();
