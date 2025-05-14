@@ -6,19 +6,19 @@ package parser.token;
 public enum ETokenType {
     DECIMAL,     // decimal
     BOOL,       // true, false
-    ADD_SUB,    // + -
-    MUL_DIV,    // * /
-    POWER,      // ^
-    NEG,        // unary operator -
     LPAREN,     // (
     RPAREN,     // )
-    COMMA,      // ,
-    QUESTION,   // ?
-    COLON,      // :
     FUNCTION,   // min max sin cos
+    NEG,        // unary operator -
+    POWER,      // ^
+    MUL_DIV,    // * /
+    ADD_SUB,    // + -
+    RELATION,   // > >= < <= <> =
     NOT,        // !
     AND,        // &
     OR,         // |
-    RELATION,   // > >= < <= <> =
+    QUESTION,   // ?
+    COLON,      // :
+    COMMA,      // ,
     DOLLAR,     // $
 }
