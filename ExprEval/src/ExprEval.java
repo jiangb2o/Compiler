@@ -6,6 +6,6 @@ public class ExprEval {
     }
 
     public static void main(String[] args) throws ExpressionException {
-        System.out.println(new Parser("max(sin(0.15), cos(0.15), sin(cos(0.15)))").parse());
+        System.out.println(new Parser("sin(32.5>65)").parse());
     }
 }

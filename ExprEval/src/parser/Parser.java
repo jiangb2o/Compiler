@@ -6,7 +6,10 @@ import exceptions.*;
 
 import java.util.ArrayList;
 
-
+/**
+ * Parser class
+ * use stack and lookahead to chose action
+ */
 public class Parser {
     /**
      * 0: shift
@@ -40,13 +43,16 @@ public class Parser {
             {0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 2} // $
     };
 
-    private final Scanner scanner;
-    private final Reducer reducer;
-    /* storage operator symbol */
-    private final ArrayList<Symbol> stack;
+
+    private final Scanner scanner; /* Scanner */
+
+    private final Reducer reducer; /* Reducer */
+
+    private final ArrayList<Symbol> stack; /* storage operator symbol */
 
     private Token lookahead;
 
+    /* Constructor */
     public Parser(String expression) throws EmptyExpressionException {
         // trim white space at begin and end
         expression = expression.trim();

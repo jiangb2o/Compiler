@@ -4,9 +4,15 @@ import parser.token.*;
 
 import exceptions.*;
 
+/**
+ * Get expression tokens
+ */
 class Scanner {
+    // input expression
     private final String input;
+    // index in input
     private int index;
+    // prev token's type
     private ETokenType prevTokenType;
 
     public Scanner(String input) {

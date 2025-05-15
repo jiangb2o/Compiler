@@ -10,13 +10,21 @@ import exceptions.*;
 
 import java.util.ArrayList;
 
+/**
+ * Chose production to reduce
+ */
 public class Reducer {
+    /* storage operator symbol */
     private final ArrayList<Symbol> stack;
 
     public Reducer(ArrayList<Symbol> stack) {
         this.stack = stack;
     }
 
+    /**
+     * reduce current token
+     * @throws ExpressionException e
+     */
     public void reduce() throws ExpressionException {
         Token top = getTopTerminal();
         switch (top.getTokenType()) {
