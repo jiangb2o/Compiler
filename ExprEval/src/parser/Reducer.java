@@ -84,8 +84,11 @@ public class Reducer {
                 // sin(ArithExpr)
                 if(lastThirdToken.getTokenString().equals("sin")) {
                     popTopTerminal();
-                    if(!(rightExpr instanceof ArithExpr)) {
+                    if(rightExpr instanceof ArithExprList) {
                         throw new FunctionCallException();
+                    }
+                    if(rightExpr instanceof BoolExpr) {
+                        throw new TypeMismatchedException();
                     }
                     resultExpr = new ArithExpr(Math.sin(((ArithExpr) rightExpr).getValue()));
                 }
@@ -132,8 +135,10 @@ public class Reducer {
 
         }
         // ArithExprList -> ArithExpr, ArithExpr/ArithExprList
-        else if (lastSecondToken.getTokenType() == ETokenType.COMMA &&
-        (rightExpr instanceof ArithExpr || rightExpr instanceof ArithExprList)) {
+        else if (lastSecondToken.getTokenType() == ETokenType.COMMA) {
+            if(rightExpr instanceof BoolExpr) {
+                throw new TypeMismatchedException();
+            }
             if (stackTopIsTerminal()) {
                 throw new MissingOperandException();
             }
@@ -271,13 +276,19 @@ public class Reducer {
      * @throws ExpressionException e
      */
     private void reduceTrinaryOperator() throws ExpressionException {
-        Token colon = popTopTerminal();
-
+        if(stackTopIsTerminal()) {
+            throw new MissingOperandException();
+        }
         Expr rightOperand = popTopNonTerminal();
         if(!(rightOperand instanceof ArithExpr)) {
             throw new TypeMismatchedException();
         }
 
+        Token colon = popTopTerminal();
+
+        if(stackTopIsTerminal()) {
+            throw new MissingOperandException();
+        }
         Expr leftOperand = popTopNonTerminal();
         if(!(leftOperand instanceof ArithExpr)) {
             throw new TypeMismatchedException();
@@ -288,6 +299,9 @@ public class Reducer {
             throw new TrinaryOperationException();
         }
 
+        if(stackTopIsTerminal()) {
+            throw new MissingOperandException();
+        }
         Expr boolOperand = popTopNonTerminal();
         if(!(boolOperand instanceof BoolExpr)) {
             throw new TypeMismatchedException();

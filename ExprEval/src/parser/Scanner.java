@@ -49,6 +49,10 @@ class Scanner {
             return scanFunction();
         }
 
+        if(Character.isLetter(headChar)) {
+            throw new IllegalIdentifierException();
+        }
+
         // operator
         return scanOperator();
     }
@@ -139,9 +143,9 @@ class Scanner {
     /**
      * Scan token as operator
      * @return Operator token
-     * @throws IllegalSymbolException illegal symbol exception
+     * @throws LexicalException illegal symbol exception
      */
-    private Operator scanOperator() throws IllegalSymbolException {
+    private Operator scanOperator() throws LexicalException {
         char opChar = input.charAt(index);
         Operator op = null;
         if(input.startsWith(">=", index)) {
@@ -160,7 +164,7 @@ class Scanner {
             op = switch (opChar) {
                 case '+' -> new Operator(ETokenType.ADD_SUB, "+");
                 case '-' -> {
-                    if(prevTokenType == ETokenType.DECIMAL || prevTokenType == ETokenType.RPAREN) {
+                    if(prevTokenType == ETokenType.DECIMAL || prevTokenType == ETokenType.RPAREN || prevTokenType == ETokenType.BOOL) {
                         yield new Operator(ETokenType.ADD_SUB, "-");
                     } else {
                         yield new Operator(ETokenType.NEG, "-");
@@ -180,6 +184,7 @@ class Scanner {
                 case '>' -> new Operator(ETokenType.RELATION, ">");
                 case '<' -> new Operator(ETokenType.RELATION, "<");
                 case '=' -> new Operator(ETokenType.RELATION, "=");
+                case '.' -> throw new IllegalDecimalException();
                 default -> throw new IllegalSymbolException();
             };
         }
