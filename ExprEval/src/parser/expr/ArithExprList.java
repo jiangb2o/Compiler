@@ -15,6 +15,14 @@ public class ArithExprList extends Expr {
         args.add(arg);
     }
 
+    public void addArg(ArrayList<Double> args) {
+        this.args.addAll(args);
+    }
+
+    public ArrayList<Double> getArgs() {
+        return args;
+    }
+
     public double getMaxArg() {
         return Collections.max(args);
     }

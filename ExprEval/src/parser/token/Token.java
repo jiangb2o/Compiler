@@ -1,6 +1,8 @@
 package parser.token;
 
-public abstract class Token {
+import parser.Symbol;
+
+public class Token implements Symbol {
     protected ETokenType tokenType;
     // A token type may have multiple tokens, use token string to confirm.
     protected String tokenString;
@@ -24,5 +26,10 @@ public abstract class Token {
      */
     public String getTokenString() {
         return tokenString;
+    }
+
+    @Override
+    public boolean isTerminal() {
+        return true;
     }
 }

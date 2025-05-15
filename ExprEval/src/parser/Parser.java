@@ -4,10 +4,10 @@ import parser.expr.*;
 import parser.token.*;
 import exceptions.*;
 
-import java.util.Stack;
+import java.util.ArrayList;
 
 
-class Parser {
+public class Parser {
     /**
      * 0: shift
      * 1: reduce
@@ -36,16 +36,14 @@ class Parser {
             {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 9, 1},// |
             {0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8},// ?
             {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1},// :
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},// ,
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6},// ,
             {0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 2} // $
     };
 
     private final Scanner scanner;
     private final Reducer reducer;
     /* storage operator symbol */
-    private final Stack<Token> stack;
-    /* storage Non-Terminal */
-    private final Stack<Expr> nonTerminalStack;
+    private final ArrayList<Symbol> stack;
 
     private Token lookahead;
 
@@ -57,10 +55,9 @@ class Parser {
         }
 
         scanner = new Scanner(expression);
-        stack = new Stack<>();
-        stack.push(new Dollar());
-        nonTerminalStack = new Stack<>();
-        reducer = new Reducer(stack, nonTerminalStack);
+        stack = new ArrayList<>();
+        stack.add(new Dollar());
+        reducer = new Reducer(stack);
     }
 
     /**
@@ -93,7 +90,7 @@ class Parser {
      * @throws LexicalException e
      */
     private void shift() throws LexicalException {
-        stack.push(lookahead);
+        stack.add(lookahead);
         lookahead = scanner.nextToken();
     }
 
@@ -111,7 +108,7 @@ class Parser {
      * @throws TypeMismatchedException e
      */
     private double accept() throws TypeMismatchedException {
-        Expr resultExpr = nonTerminalStack.peek();
+        Expr resultExpr = getTopExpr();
         if(resultExpr instanceof ArithExpr) {
             return  ((ArithExpr) resultExpr).getValue();
         } else {
@@ -126,7 +123,32 @@ class Parser {
      * @return opp value
      */
     private int getOPP() {
-        return oppTable[stack.peek().getTokenType().ordinal()][lookahead.getTokenType().ordinal()];
+        return oppTable[getTopToken().getTokenType().ordinal()][lookahead.getTokenType().ordinal()];
     }
 
+    /**
+     * Get top token of stack
+     * @return top token
+     */
+    private Token getTopToken() {
+        for(int i = stack.size() - 1; i >= 0; i--) {
+            if(stack.get(i) instanceof Token) {
+                return (Token) stack.get(i);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Get top Expr of stack
+     * @return top expr
+     */
+    private Expr getTopExpr() {
+        for(int i = stack.size() - 1; i >= 0; i--) {
+            if(stack.get(i) instanceof Expr) {
+                return (Expr) stack.get(i);
+            }
+        }
+        return null;
+    }
 }

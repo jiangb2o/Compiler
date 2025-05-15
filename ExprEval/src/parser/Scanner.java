@@ -78,10 +78,10 @@ class Scanner {
         if(!end() && input.charAt(index) == 'e') {
             index++;
             String exponent = "";
-            char operator = '+';
+            String operator = "+";
 
             if(!end() && (input.charAt(index) == '+' || input.charAt(index) == '-')) {
-                operator = input.charAt(index);
+                operator = Character.toString(input.charAt(index));
                 index++;
             }
 
@@ -204,7 +204,7 @@ class Scanner {
      * Skip white space between tokens
      */
     private void skipWhiteSpace() {
-        if(!end() && input.charAt(index) == ' ') {
+        while (!end() && input.charAt(index) == ' ') {
             index++;
         }
     }
