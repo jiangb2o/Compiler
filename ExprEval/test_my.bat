@@ -1,6 +1,6 @@
 @echo off
 cd bin
-java test.ExprEvalTest ..\testcases\1.xml  > ..\testcases\report.txt
+java test.ExprEvalTest ..\testcases\mytest.xml  > ..\testcases\report.txt
 cd ..
 type testcases\report.txt
 pause

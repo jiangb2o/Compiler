@@ -35,6 +35,7 @@ bin/
 
 ### javadoc
 docs/
+doc/
 ### readme.txt
 *.txt
 ### compressed files
