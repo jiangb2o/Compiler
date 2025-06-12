@@ -1,0 +1,36 @@
+(* 除0运算 DividedByZeroException *)
+MODULE FactorialProgram;
+
+CONST illegal = 0;
+TYPE BOOL = BOOLEAN;
+
+(* 阶乘过程 *)
+PROCEDURE Factorial(n: INTEGER);
+    VAR result, i: INTEGER;
+    VAR legal: BOOL;
+BEGIN
+    (* 除0运算 *)
+    result := 1 / 0;
+    legal := n >= 0;
+    IF legal THEN
+        result := 1;
+        i := 1;
+        WHILE i <= n DO
+            result := result * i;
+            i := i + 1
+        END;
+        Write(result); WriteLn
+    ELSE
+        Write(illegal); WriteLn
+    END;
+END Factorial;
+
+(* 模块内部变量 *)
+VAR
+    n: INTEGER;
+
+(* 模块程序体 *)
+BEGIN
+    Read(n);
+    Factorial(n)
+END FactorialProgram.
